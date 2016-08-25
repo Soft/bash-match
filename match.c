@@ -79,7 +79,7 @@ static int match_function(WORD_LIST *list) {
 		for (int i = 0; i < num_results; i++) {
 			pcre_get_substring(subject, vector, num_results, i, (const char **)&group);
 			array_insert(array_cell(var), i, group);
-			pcre_free(group);
+			pcre_free_substring(group);
 		}
 	} else {
 		for (int i = 0; list && i < num_results; list = list->next, i++) {
@@ -90,7 +90,7 @@ static int match_function(WORD_LIST *list) {
 			}
 			pcre_get_substring(subject, vector, num_results, i, (const char **)&group);
 			bind_variable(list->word->word, group, 0);
-			pcre_free(group);
+			pcre_free_substring(group);
 		}
 	}
 
